@@ -12,7 +12,8 @@ Demonstrar de forma interativa como ferramentas como o **Wireshark** capturam e 
 
 ## Demonstração
 
-![image](https://github.com/user-attachments/assets/6f04d29a-128a-47c2-bf2e-97cddf5dedaf)
+<img width="414" alt="image" src="https://github.com/user-attachments/assets/e0433aee-0b7f-4952-99c5-75d945db4ca2" />
+
 
 
 > *Simulação de pacotes capturados com protocolos variados e dados visíveis.*
