@@ -1,0 +1,88 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Simulador de Sniffer de Rede</title>
+  <style>
+    body {
+      background-color: #1e1e1e;
+      color: #00ff99;
+      font-family: monospace;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #0ff;
+    }
+    #painel {
+      background-color: #000;
+      border: 2px solid #0ff;
+      padding: 15px;
+      height: 400px;
+      overflow-y: auto;
+      margin-top: 20px;
+    }
+    .pacote {
+      margin-bottom: 10px;
+      padding: 10px;
+      border: 1px dashed #00ff99;
+      background-color: #111;
+    }
+    button {
+      background-color: #00ff99;
+      color: #000;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 10px auto;
+      display: block;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  <h1>🕵️ Simulador de Sniffer de Rede</h1>
+  <p>Veja como pacotes de rede podem ser capturados em uma conexão!</p>
+  <button onclick="capturarPacote()">Capturar Pacote</button>
+  <div id="painel"></div>
+
+  <script>
+    const protocolos = ["HTTP", "HTTPS", "DNS", "TCP", "UDP", "SMTP"];
+    const ips = ["192.168.0.2", "10.0.0.15", "172.16.1.22", "8.8.8.8", "104.21.3.102"];
+
+    function gerarPacote() {
+      const origem = ips[Math.floor(Math.random() * ips.length)];
+      const destino = ips[Math.floor(Math.random() * ips.length)];
+      const protocolo = protocolos[Math.floor(Math.random() * protocolos.length)];
+      const dados = {
+        origem,
+        destino,
+        protocolo,
+        info: protocolo === "HTTP" ? "GET /index.html" :
+              protocolo === "DNS" ? "Consulta por google.com" :
+              protocolo === "TCP" ? "ACK, PSH" : "Payload de dados"
+      };
+
+      return `
+        <div class="pacote">
+          <strong>Protocolo:</strong> ${dados.protocolo}<br>
+          <strong>Origem:</strong> ${dados.origem}<br>
+          <strong>Destino:</strong> ${dados.destino}<br>
+          <strong>Dados:</strong> ${dados.info}
+        </div>
+      `;
+    }
+
+    function capturarPacote() {
+      const painel = document.getElementById("painel");
+      painel.innerHTML += gerarPacote();
+      painel.scrollTop = painel.scrollHeight;
+    }
+
+    // Captura automática a cada 4 segundos (opcional)
+    setInterval(capturarPacote, 4000);
+  </script>
+</body>
+</html>
